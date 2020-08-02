@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
 import './App.css';
+import { NavBar } from './components/nav-bar/NavBar';
+import { Users } from './components/users/Users';
+import axios from 'axios'
+import { Props } from './interfaces/types';
 
-function App() {
+export const App = () => {
+
+  const [userState, setUserState] = useState<Props[]>([])
+  const [loading, setLoading] = useState(false)
+
+  const getUsers = async () => await axios('https://api.github.com/users').then(res => setUserState(res.data))
+
+  useEffect(() => {
+    getUsers()
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <NavBar />
+      <div className="container">
+        <Users users={userState}/>
+      </div>
     </div>
-  );
+  )
 }
+
 
 export default App;
