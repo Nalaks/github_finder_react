@@ -3,14 +3,16 @@ import './App.css';
 import NavBar from './components/nav-bar/NavBar';
 import Users from './components/users/Users';
 import axios from 'axios'
-import { UserProp } from './interfaces/types';
+import { UserProp, AlertProp } from './interfaces/types';
 import Spinner from './components/spinner/Spinner';
 import Search from './components/users/Search';
+import Alert from './components/alert/Alert';
 
 export const App = () => {
 
   const [userState, setUserState] = useState<UserProp[]>([])
   const [loading, setLoading] = useState(false)
+  const [alertState, setAlertState] = useState<AlertProp | null>(null)
 
   const getUsers = async (search: string) => {
     setLoading(true)
@@ -21,11 +23,19 @@ export const App = () => {
 
   const clearUsers = () => setUserState([])
 
+  const setAlert = (msg: string, type: string) => {
+    setAlertState({msg, type})
+    setTimeout(() => {
+      setAlertState(null)
+    }, 5000);
+  }
+
   return (
     <div className='App'>
       <NavBar />
       <div className="container">
-        <Search getUsers={getUsers} clearUsers={clearUsers} userState={userState}/>
+        { alertState !==  null && <Alert alertState={alertState}/>}
+        <Search getUsers={getUsers} clearUsers={clearUsers} userState={userState} setAlert={setAlert}/>
         { loading ? <Spinner /> : null }
         <Users users={userState} />
       </div>

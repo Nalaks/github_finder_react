@@ -1,15 +1,19 @@
 import React, { useState } from 'react'
 import { SearchProps } from '../../interfaces/types'
 
-const Search: React.FC<SearchProps> = ({ getUsers, clearUsers, userState }) => {
+const Search: React.FC<SearchProps> = ({ getUsers, clearUsers, userState, setAlert }) => {
   const [searchUsers, setSearchUsers] = useState('')
 
   const handleSearch = (e: React.FormEvent<HTMLInputElement>) => setSearchUsers(e.currentTarget.value)
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    getUsers(searchUsers)
-    setSearchUsers('')
+    if (searchUsers === '') {
+      setAlert('Please enter a search term.', 'light')
+    } else {
+      getUsers(searchUsers)
+      setSearchUsers('')
+    }
   }
 
   return (

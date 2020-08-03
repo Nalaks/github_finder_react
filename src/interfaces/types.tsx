@@ -19,4 +19,14 @@ export interface SearchProps {
   getUsers: (search: string) => Promise<void>
   clearUsers: () => void
   userState: UserProp[]
+  setAlert: (msg: string, type: string) => void
+}
+
+export interface AlertProp {
+  msg: string
+  type: string
+}
+
+export interface AlertProps {
+  alertState: AlertProp
 }
