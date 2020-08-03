@@ -1,4 +1,4 @@
-export interface Props {
+export interface UserProp {
   id: string
   login: string
   avatar_url: string
@@ -6,9 +6,17 @@ export interface Props {
 }
 
 export interface UserProps {
-  user: Props
+  user: UserProp
 }
 
-export interface GitProps {
-  users: Props[]
+export interface UsersProps {
+  users: UserProp[]
+}
+
+export type Search = { text: string }
+
+export interface SearchProps {
+  getUsers: (search: string) => Promise<void>
+  clearUsers: () => void
+  userState: UserProp[]
 }

@@ -1,8 +1,8 @@
 import React from 'react'
-import { GitProps } from '../../interfaces/types'
-import { UserItem } from './UserItem'
+import { UsersProps } from '../../interfaces/types'
+import UserItem  from './UserItem'
 
-export const Users: React.FC<GitProps> = ({ users }) => {
+const Users: React.FC<UsersProps> = ({ users }) => {
 
   const userStyle = {
     display: 'grid',
@@ -16,3 +16,5 @@ export const Users: React.FC<GitProps> = ({ users }) => {
     </div>
   )
 }
+
+export default Users
