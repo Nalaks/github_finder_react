@@ -6,7 +6,7 @@ export interface UserProp {
 }
 
 export interface UserProps {
-  props: any
+  match: any
 }
 
 export interface UserItemProps {
@@ -39,8 +39,13 @@ export interface AlertProp {
   type: string
 }
 
-export interface AlertProps {
-  alertState: AlertProp
+export interface ContextAlert {
+  alert: AlertProp | null
+  setAlert: (msg: string, type: string) => void
+}
+
+export interface StateAlert {
+  alert: AlertProp | null
 }
 
 

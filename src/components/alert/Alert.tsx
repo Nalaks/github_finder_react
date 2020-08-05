@@ -1,11 +1,18 @@
-import React from 'react'
-import { AlertProps } from '../../interfaces/types'
+import React, { useContext, Fragment } from 'react'
+import AlertContext from '../../context/AlertContext'
 
-const Alert: React.FC<AlertProps> = ({ alertState }) => {
+const Alert = () => {
+
+  const alertState = useContext(AlertContext)
+  const { alert } = alertState
+  
   return (
-    <div className={`alert alert-${alertState.type}`}>
-      <i className="fas fa-info-circle" />{alertState.msg}
-    </div>
+    <Fragment>
+      { alert !== null && (
+      <div className={`alert alert-${alert.type}`}>
+        <i className="fas fa-info-circle" />{alert.msg}
+      </div> )}
+    </Fragment>
   )
 }
 

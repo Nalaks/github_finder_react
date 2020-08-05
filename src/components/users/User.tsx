@@ -4,15 +4,15 @@ import { Link } from 'react-router-dom';
 import GithubContext from '../../context/GithubContext';
 import { UserProps } from '../../interfaces/types';
 
-const User: React.FC<UserProps> = ({ props }) => {
+const User: React.FC<UserProps> = ({ match }) => {
 
 	const githubContext = useContext(GithubContext)
 
 	const { user, getUser, loading, getRepos, repos } = githubContext
 
 	useEffect(() => {
-		getUser(props.match.params.login);
-    getRepos(props.match.params.login);
+		getUser(match.params.login);
+    getRepos(match.params.login);
     //eslint-disable-next-line
 	}, []);
 

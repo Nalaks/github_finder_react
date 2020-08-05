@@ -1,13 +1,19 @@
 import React, { useState, useContext } from 'react'
 import GithubContext from '../../context/GithubContext'
+import AlertContext from '../../context/AlertContext'
 
-const Search: React.FC<any> = ({ setAlert }) => {
+const Search = () => {
+  //component state
   const [searchUsers, setSearchUsers] = useState('')
 
+  // app context
   const githubContext = useContext(GithubContext)
-
   const { getUsers, clearUsers, users } = githubContext
 
+  const alertState = useContext(AlertContext)
+  const { setAlert } = alertState
+
+  // component functions
   const handleSearch = (e: React.FormEvent<HTMLInputElement>) => setSearchUsers(e.currentTarget.value)
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
