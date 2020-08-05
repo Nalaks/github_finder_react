@@ -1,12 +1,19 @@
-import React, { useEffect, Fragment } from 'react';
-import { SingleUserProps } from '../../interfaces/types';
+import React, { useEffect, Fragment, useContext } from 'react';
 import Spinner from '../spinner/Spinner';
 import { Link } from 'react-router-dom';
+import GithubContext from '../../context/GithubContext';
+import { UserProps } from '../../interfaces/types';
 
-const User: React.FC<SingleUserProps> = ({ user, getUser, loading, getRepos, props, repos }) => {
+const User: React.FC<UserProps> = ({ props }) => {
+
+	const githubContext = useContext(GithubContext)
+
+	const { user, getUser, loading, getRepos, repos } = githubContext
+
 	useEffect(() => {
 		getUser(props.match.params.login);
-		getRepos(props.match.params.login);
+    getRepos(props.match.params.login);
+    //eslint-disable-next-line
 	}, []);
 
 	return (

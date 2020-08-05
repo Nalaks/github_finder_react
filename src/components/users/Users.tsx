@@ -1,8 +1,14 @@
-import React from 'react'
-import { UsersProps } from '../../interfaces/types'
+import React, { Fragment, useContext } from 'react'
 import UserItem  from './UserItem'
+import GithubContext from '../../context/GithubContext'
+import Spinner from '../spinner/Spinner'
 
-const Users: React.FC<UsersProps> = ({ users }) => {
+const Users = () => {
+
+  const githubContext = useContext(GithubContext)
+
+  const { loading, users } = githubContext
+
 
   const userStyle = {
     display: 'grid',
@@ -11,9 +17,12 @@ const Users: React.FC<UsersProps> = ({ users }) => {
   }
   
   return (
-    <div style={userStyle}>
-      { users.map((user) => <UserItem key={user.id} user={user}/> )}
-    </div>
+    <Fragment>
+      { loading ? <Spinner /> : null }
+      <div style={userStyle}>
+        { users.map((user) => <UserItem key={user.id} user={user}/> )}
+      </div>
+    </Fragment>
   )
 }
 

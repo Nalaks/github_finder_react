@@ -1,8 +1,12 @@
-import React, { useState } from 'react'
-import { SearchProps } from '../../interfaces/types'
+import React, { useState, useContext } from 'react'
+import GithubContext from '../../context/GithubContext'
 
-const Search: React.FC<SearchProps> = ({ getUsers, clearUsers, userState, setAlert }) => {
+const Search: React.FC<any> = ({ setAlert }) => {
   const [searchUsers, setSearchUsers] = useState('')
+
+  const githubContext = useContext(GithubContext)
+
+  const { getUsers, clearUsers, users } = githubContext
 
   const handleSearch = (e: React.FormEvent<HTMLInputElement>) => setSearchUsers(e.currentTarget.value)
 
@@ -22,7 +26,7 @@ const Search: React.FC<SearchProps> = ({ getUsers, clearUsers, userState, setAle
         <input type="text" name="text" placeholder='Search Users...' onChange={handleSearch} value={searchUsers}/>
         <input type="submit" value="Search" className='btn btn-dark btn-block'/>
       </form>
-        { userState.length > 1 ? <button className='btn btn-light btn-block' onClick={clearUsers}>Clear</button> : null }
+        { users.length > 1 ? <button className='btn btn-light btn-block' onClick={clearUsers}>Clear</button> : null }
     </div>
   )
 }

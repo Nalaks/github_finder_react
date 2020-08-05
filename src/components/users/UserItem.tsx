@@ -1,9 +1,8 @@
 import React from 'react'
-import { UserProps } from '../../interfaces/types'
+import { UserItemProps } from '../../interfaces/types'
 import { Link } from 'react-router-dom'
 
-
-const UserItem: React.FC<UserProps> = ({ user: { id, login, avatar_url, html_url } }) => {
+const UserItem: React.FC<UserItemProps> = ({ user: { login, avatar_url } }) => {
 
   return (
     <div className='card text-center'>
